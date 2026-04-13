@@ -30,6 +30,7 @@ export function insertionSort(arr) {
                     type: STEP_TYPES.SET,
                     index: j + 1,
                     value: a[j],
+                    line: 4,
                 });
 
                 j--;

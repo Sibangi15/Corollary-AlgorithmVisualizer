@@ -8,7 +8,7 @@ export default function useAnimation() {
     const sleep = (ms) =>
         new Promise((resolve) => setTimeout(resolve, ms));
 
-    const play = async (steps, array, setArray, setActive, setFoundIndex) => {
+    const play = async (steps, array, setArray, setActive, setFoundIndex, setCurrentLine) => {
         setIsPlaying(true);
         stopRef.current = false;
 
@@ -16,6 +16,10 @@ export default function useAnimation() {
 
         for (let step of steps) {
             if (stopRef.current) break;
+
+            if (step.line !== undefined) {
+                setCurrentLine(step.line);
+            }
 
             switch (step.type) {
                 case "compare":

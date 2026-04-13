@@ -1,12 +1,18 @@
 import { useState } from "react";
 import ArrayBars from "../components/visualizer/ArrayBars";
+import CodePanel from "../components/visualizer/CodePanel";
 import ControlPanel from "../components/controls/ControlPanel";
 import useAnimation from "../hooks/useAnimation";
+import { PSEUDOCODE } from "../utils/pseudocode";
 
 function Visualizer() {
     const [array, setArray] = useState([50, 120, 80, 30, 160, 90, 200]);
     const [active, setActive] = useState([]);
     const [foundIndex, setFoundIndex] = useState(null);
+    const [currentLine, setCurrentLine] = useState(null);
+    const [algorithm, setAlgorithm] = useState("bubble");
+
+    const code = PSEUDOCODE[algorithm];
 
     const { play, pause, setSpeed, isPlaying } = useAnimation();
 
@@ -30,9 +36,26 @@ function Visualizer() {
                 setActive={setActive}
                 generateArray={generateArray}
                 setFoundIndex={setFoundIndex}
+                setCurrentLine={setCurrentLine}
             />
 
-            <ArrayBars array={array} active={active} foundIndex={foundIndex} />
+            <div className="grid grid-cols-3 gap-6 h-125">
+
+                {/* Visualization */}
+                <div className="col-span-2">
+                    <ArrayBars
+                        array={array}
+                        active={active}
+                        foundIndex={foundIndex}
+                    />
+                </div>
+
+                {/* Code Panel */}
+                <div className="col-span-1">
+                    <CodePanel code={code} currentLine={currentLine} />
+                </div>
+
+            </div>
         </div>
     );
 }

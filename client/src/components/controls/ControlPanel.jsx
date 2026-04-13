@@ -17,6 +17,7 @@ function ControlPanel({
     setArray,
     setActive,
     setFoundIndex,
+    setCurrentLine,
 }) {
 
     const handleStart = () => {
@@ -41,7 +42,7 @@ function ControlPanel({
             steps = quickSort(array);
         }
 
-        play(steps, array, setArray, setActive, setFoundIndex);
+        play(steps, array, setArray, setActive, setFoundIndex, setCurrentLine);
     };
 
     const [size, setSize] = useState(10);
@@ -59,6 +60,7 @@ function ControlPanel({
         setActive([]);
         setFoundIndex(null);
         generateArray(size);
+        setCurrentLine(null);
     };
 
     return (
