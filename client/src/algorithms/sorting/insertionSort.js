@@ -12,6 +12,7 @@ export function insertionSort(arr) {
         steps.push({
             type: STEP_TYPES.HIGHLIGHT,
             index: i,
+            line: 1,
         });
 
         while (j >= 0) {
@@ -20,6 +21,7 @@ export function insertionSort(arr) {
                 type: STEP_TYPES.COMPARE,
                 i: j,
                 j: j + 1,
+                line: 3,
             });
 
             if (a[j] > key) {
@@ -30,7 +32,7 @@ export function insertionSort(arr) {
                     type: STEP_TYPES.SET,
                     index: j + 1,
                     value: a[j],
-                    line: 4,
+                    line: 5,
                 });
 
                 j--;
@@ -46,6 +48,7 @@ export function insertionSort(arr) {
             type: STEP_TYPES.SET,
             index: j + 1,
             value: key,
+            line: 7,
         });
     }
 

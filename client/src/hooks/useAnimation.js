@@ -8,11 +8,12 @@ export default function useAnimation() {
     const sleep = (ms) =>
         new Promise((resolve) => setTimeout(resolve, ms));
 
-    const play = async (steps, array, setArray, setActive, setFoundIndex, setCurrentLine) => {
+    const play = async (steps, array, setArray, setActive, setFoundIndex, setCurrentLine, setGrid) => {
         setIsPlaying(true);
         stopRef.current = false;
 
-        let arr = [...array];
+        const isArrayMode = Array.isArray(array);
+        let arr = Array.isArray(array) ? [...array] : null;
 
         for (let step of steps) {
             if (stopRef.current) break;
@@ -27,15 +28,19 @@ export default function useAnimation() {
                     break;
 
                 case "swap":
-                    [arr[step.i], arr[step.j]] = [arr[step.j], arr[step.i]];
-                    setArray([...arr]);
-                    setActive([step.i, step.j]);
+                    if (isArrayMode) {
+                        [arr[step.i], arr[step.j]] = [arr[step.j], arr[step.i]];
+                        setArray([...arr]);
+                        setActive?.([step.i, step.j]);
+                    }
                     break;
 
                 case "set":
-                    arr[step.index] = step.value;
-                    setArray([...arr]);
-                    setActive([step.index]);
+                    if (isArrayMode) {
+                        arr[step.index] = step.value;
+                        setArray([...arr]);
+                        setActive?.([step.index]);
+                    }
                     break;
 
                 case "highlight":
@@ -43,12 +48,28 @@ export default function useAnimation() {
                     break;
 
                 case "visit":
-                    setActive([step.index]);
+                    setActive?.([step.index]);
                     break;
 
                 case "found":
-                    setFoundIndex(step.index);
-                    setActive([]);
+                    setFoundIndex?.(step.index);
+                    setActive?.([]);
+                    break;
+
+                case "visit_node":
+                    setGrid(prev => {
+                        const newGrid = prev.map(r => r.map(c => ({ ...c })));
+                        newGrid[step.row][step.col].isVisited = true;
+                        return newGrid;
+                    });
+                    break;
+
+                case "path_node":
+                    setGrid(prev => {
+                        const newGrid = prev.map(r => r.map(c => ({ ...c })));
+                        newGrid[step.row][step.col].isPath = true;
+                        return newGrid;
+                    });
                     break;
 
                 default:
@@ -58,7 +79,7 @@ export default function useAnimation() {
             await sleep(speedRef.current);
         }
 
-        setActive([]);
+        setActive?.([]);
         setIsPlaying(false);
     };
 

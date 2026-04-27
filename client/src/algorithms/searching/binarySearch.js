@@ -12,6 +12,7 @@ export function binarySearch(arr, target) {
         steps.push({
             type: STEP_TYPES.VISIT,
             index: mid,
+            line: 3,
         });
 
         // compare
@@ -19,12 +20,14 @@ export function binarySearch(arr, target) {
             type: STEP_TYPES.COMPARE,
             i: mid,
             j: -1,
+            line: 4,
         });
 
         if (arr[mid] === target) {
             steps.push({
                 type: STEP_TYPES.FOUND,
                 index: mid,
+                line: 5,
             });
             return steps;
         }

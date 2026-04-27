@@ -8,6 +8,7 @@ export function linearSearch(arr, target) {
         steps.push({
             type: STEP_TYPES.VISIT,
             index: i,
+            line: 1,
         });
 
         // compare
@@ -15,12 +16,14 @@ export function linearSearch(arr, target) {
             type: STEP_TYPES.COMPARE,
             i: i,
             j: -1,
+            line: 2,
         });
 
         if (arr[i] === target) {
             steps.push({
                 type: STEP_TYPES.FOUND,
                 index: i,
+                line: 3,
             });
             return steps;
         }

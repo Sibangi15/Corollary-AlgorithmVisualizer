@@ -5,4 +5,6 @@ export const STEP_TYPES = {
     HIGHLIGHT: "highlight",
     VISIT: "visit",
     FOUND: "found",
+    VISIT_NODE: "visit_node",
+    PATH_NODE: "path_node",
 };

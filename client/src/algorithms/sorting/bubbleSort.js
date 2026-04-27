@@ -12,7 +12,7 @@ export function bubbleSort(arr) {
                 type: STEP_TYPES.COMPARE,
                 i: j,
                 j: j + 1,
-                line: 2, // pseudocode line number
+                line: 2, // "if arr[j] > arr[j+1]"
             });
 
             if (a[j] > a[j + 1]) {
@@ -24,7 +24,7 @@ export function bubbleSort(arr) {
                     type: STEP_TYPES.SWAP,
                     i: j,
                     j: j + 1,
-                    line: 3, // pseudocode line number
+                    line: 3, // "swap arr[j] and arr[j+1]"
                 });
             }
         }

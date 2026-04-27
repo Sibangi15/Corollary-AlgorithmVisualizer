@@ -16,6 +16,7 @@ export function mergeSort(arr) {
                 type: STEP_TYPES.COMPARE,
                 i: l + i,
                 j: m + 1 + j,
+                line: 7,
             });
 
             if (left[i] <= right[j]) {
@@ -25,6 +26,7 @@ export function mergeSort(arr) {
                     type: STEP_TYPES.SET,
                     index: k,
                     value: left[i],
+                    line: 9,
                 });
 
                 i++;
@@ -35,6 +37,7 @@ export function mergeSort(arr) {
                     type: STEP_TYPES.SET,
                     index: k,
                     value: right[j],
+                    line: 11,
                 });
 
                 j++;
@@ -50,6 +53,7 @@ export function mergeSort(arr) {
                 type: STEP_TYPES.SET,
                 index: k,
                 value: left[i],
+                line: 15,
             });
 
             i++; k++;
@@ -62,6 +66,7 @@ export function mergeSort(arr) {
                 type: STEP_TYPES.SET,
                 index: k,
                 value: right[j],
+                line: 17,
             });
 
             j++; k++;

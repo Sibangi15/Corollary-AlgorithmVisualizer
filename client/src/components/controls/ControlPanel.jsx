@@ -7,6 +7,8 @@ import { mergeSort } from "../../algorithms/sorting/mergeSort";
 import { quickSort } from "../../algorithms/sorting/quickSort";
 import { linearSearch } from "../../algorithms/searching/linearSearch";
 import { binarySearch } from "../../algorithms/searching/binarySearch";
+import { bfs } from "../../algorithms/graph/bfs";
+import { dfs } from "../../algorithms/graph/dfs";
 
 function ControlPanel({
     play,
@@ -18,10 +20,41 @@ function ControlPanel({
     setActive,
     setFoundIndex,
     setCurrentLine,
+    algorithm,
+    setAlgorithm,
+    mode,
+    setMode,
+    grid,
+    setGrid,
+    resetGrid,
 }) {
 
     const handleStart = () => {
         let steps = [];
+
+        if (mode === "graph") {
+            const cleanGrid = grid.map(row =>
+                row.map(node => ({
+                    ...node,
+                    isVisited: false,
+                    isPath: false,
+                    previous: null
+                }))
+            );
+
+            setGrid(cleanGrid);
+
+            if (algorithm === "bfs") {
+                steps = bfs(cleanGrid);
+            } else if (algorithm === "dfs") {
+                steps = dfs(cleanGrid);
+            }
+
+            play(steps, null, null, null, null, null, setGrid);
+            return;
+        }
+
+        // Sorting & Searching
         const numTarget = Number(target);
 
         if (algorithm === "linear") {
@@ -46,7 +79,6 @@ function ControlPanel({
     };
 
     const [size, setSize] = useState(10);
-    const [algorithm, setAlgorithm] = useState("bubble");
     const [target, setTarget] = useState("");
 
     const generateArray = (customSize = size) => {
@@ -125,6 +157,15 @@ function ControlPanel({
                 />
             </div>
 
+            <select
+                value={mode}
+                onChange={(e) => setMode(e.target.value)}
+                className="bg-gray-800 px-3 py-2 rounded"
+            >
+                <option value="sorting">Sorting</option>
+                <option value="graph">Graph</option>
+            </select>
+
             <input
                 type="number"
                 placeholder="Enter target"
@@ -138,14 +179,34 @@ function ControlPanel({
                 onChange={(e) => setAlgorithm(e.target.value)}
                 className="bg-gray-800 px-3 py-2 rounded"
             >
-                <option value="bubble">Bubble Sort</option>
-                <option value="selection">Selection Sort</option>
-                <option value="insertion">Insertion Sort</option>
-                <option value="merge">Merge Sort</option>
-                <option value="quick">Quick Sort</option>
-                <option value="linear">Linear Search</option>
-                <option value="binary">Binary Search</option>
+                {mode === "sorting" && (
+                    <>
+                        <option value="bubble">Bubble Sort</option>
+                        <option value="selection">Selection Sort</option>
+                        <option value="insertion">Insertion Sort</option>
+                        <option value="merge">Merge Sort</option>
+                        <option value="quick">Quick Sort</option>
+                        <option value="linear">Linear Search</option>
+                        <option value="binary">Binary Search</option>
+                    </>
+                )}
+
+                {mode === "graph" && (
+                    <>
+                        <option value="bfs">BFS</option>
+                        <option value="dfs">DFS</option>
+                    </>
+                )}
             </select>
+
+            {mode === "graph" && (
+                <button
+                    onClick={resetGrid}
+                    className="px-4 py-2 bg-red-500 rounded"
+                >
+                    Reset Grid
+                </button>
+            )}
 
         </div>
     );

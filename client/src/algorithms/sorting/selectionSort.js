@@ -14,6 +14,7 @@ export function selectionSort(arr) {
                 type: STEP_TYPES.COMPARE,
                 i: minIndex,
                 j: j,
+                line: 2,
             });
 
             if (a[j] < a[minIndex]) {
@@ -28,6 +29,7 @@ export function selectionSort(arr) {
                 type: STEP_TYPES.SWAP,
                 i: i,
                 j: minIndex,
+                line: 5,
             });
         }
     }
