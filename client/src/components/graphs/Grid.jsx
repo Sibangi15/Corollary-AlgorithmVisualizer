@@ -1,6 +1,6 @@
 import Node from "./Node";
 
-function Grid({ grid, handleCellClick }) {
+function Grid({ grid, handleCellClick, handleWeightChange }) {
     return (
         <div className="inline-block">
             {grid.map((row, rIdx) => (
@@ -10,6 +10,7 @@ function Grid({ grid, handleCellClick }) {
                             key={cIdx}
                             node={node}
                             onClick={handleCellClick}
+                            onWeightChange={handleWeightChange}
                         />
                     ))}
                 </div>

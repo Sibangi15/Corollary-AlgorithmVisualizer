@@ -15,6 +15,7 @@ export function createGrid(rows, cols) {
                 isPath: false,
                 distance: Infinity,
                 previous: null,
+                weight: 1,
             });
         }
 

@@ -56,4 +56,36 @@ export const PSEUDOCODE = {
         "  else high = mid - 1",
         "return -1",
     ],
+
+    bfs: [
+        "create empty queue",                 // 0
+        "mark start as visited",              // 1
+        "enqueue start",                     // 2
+        "while queue is not empty",          // 3
+        "  node = dequeue",                 // 4
+        "  for each neighbor of node",      // 5
+        "    if neighbor not visited",      // 6
+        "      mark neighbor visited",      // 7
+        "      enqueue neighbor",           // 8
+    ],
+
+    dfs: [
+        "mark node as visited",              // 0
+        "for each neighbor of node",         // 1
+        "  if neighbor not visited",         // 2
+        "    dfs(neighbor)",                 // 3
+    ],
+
+    dijkstra: [
+        "initialize dist array with infinity",   // 0
+        "dist[start] = 0",                       // 1
+        "create min priority queue",             // 2
+        "push (0, start) into queue",            // 3
+        "while queue is not empty",              // 4
+        "  (dist, node) = extract min",          // 5
+        "  for each neighbor of node",           // 6
+        "    if new distance < current distance",// 7
+        "      update distance",                 // 8
+        "      push to queue",                   // 9
+    ],
 };

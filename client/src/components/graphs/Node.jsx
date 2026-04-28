@@ -10,8 +10,14 @@ function Node({ node, onClick }) {
     return (
         <div
             onClick={() => onClick(node.row, node.col)}
-            className={`w-6 h-6 border border-gray-700 ${baseColor} transition`}
-        />
+            onContextMenu={(e) => {
+                e.preventDefault();
+                onWeightChange(node.row, node.col);
+            }}
+            className={`w-6 h-6 border border-gray-700 ${baseColor} flex items-center justify-center text-xs`}
+        >
+            {node.weight > 1 && node.weight}
+        </div>
     );
 }
 
