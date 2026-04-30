@@ -58,34 +58,34 @@ export const PSEUDOCODE = {
     ],
 
     bfs: [
-        "create empty queue",                 // 0
-        "mark start as visited",              // 1
-        "enqueue start",                     // 2
-        "while queue is not empty",          // 3
-        "  node = dequeue",                 // 4
-        "  for each neighbor of node",      // 5
-        "    if neighbor not visited",      // 6
-        "      mark neighbor visited",      // 7
-        "      enqueue neighbor",           // 8
+        "create empty queue", 
+        "mark start as visited",            
+        "enqueue start",                
+        "while queue is not empty",  
+        "  node = dequeue",
+        "  for each neighbor of node", 
+        "    if neighbor not visited",
+        "      mark neighbor visited", 
+        "      enqueue neighbor", 
     ],
 
     dfs: [
-        "mark node as visited",              // 0
-        "for each neighbor of node",         // 1
-        "  if neighbor not visited",         // 2
-        "    dfs(neighbor)",                 // 3
+        "mark node as visited",           
+        "for each neighbor of node",      
+        "  if neighbor not visited",   
+        "    dfs(neighbor)",          
     ],
 
     dijkstra: [
-        "initialize dist array with infinity",   // 0
-        "dist[start] = 0",                       // 1
-        "create min priority queue",             // 2
-        "push (0, start) into queue",            // 3
-        "while queue is not empty",              // 4
-        "  (dist, node) = extract min",          // 5
-        "  for each neighbor of node",           // 6
-        "    if new distance < current distance",// 7
-        "      update distance",                 // 8
-        "      push to queue",                   // 9
+        "initialize dist array with infinity",
+        "dist[start] = 0",              
+        "create min priority queue",             
+        "push (0, start) into queue",   
+        "while queue is not empty",              
+        "  (dist, node) = extract min",          
+        "  for each neighbor of node",           
+        "    if new distance < current distance",
+        "      update distance",           
+        "      push to queue",             
     ],
 };
