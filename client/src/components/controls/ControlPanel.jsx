@@ -310,6 +310,10 @@ function ControlPanel({
     grid,
     setGrid,
     resetGrid,
+    steps,
+    currentStep,
+    setCurrentStep,
+    applyStep
 }) {
     const [size, setSize] = useState(10);
     const [target, setTarget] = useState("");
@@ -407,7 +411,7 @@ function ControlPanel({
     };
 
     return (
-        <div className="bg-[#0b0f17] border border-[#1a1f2b] rounded-xl px-4 py-3 flex items-center justify-between">
+        <div className="bg-[#143542] border border-[#09b7b4]/30 rounded-xl px-4 py-3 flex items-center justify-between">
 
             {/* LEFT */}
             <div className="flex items-center gap-4">
@@ -415,7 +419,7 @@ function ControlPanel({
                 <select
                     value={mode}
                     onChange={(e) => setMode(e.target.value)}
-                    className="bg-slate-900/90 text-xs border border-[#2a3142] px-2 py-1 rounded"
+                    className="bg-[#00030a] text-xs border border-[#09b7b4]/40 px-2 py-1 rounded text-[#bc9891]"
                 >
                     <option value="sorting">Sorting</option>
                     <option value="searching">Searching</option>
@@ -425,7 +429,7 @@ function ControlPanel({
                 <select
                     value={algorithm}
                     onChange={(e) => setAlgorithm(e.target.value)}
-                    className="bg-slate-900/90 text-xs border border-[#2a3142] px-2 py-1 rounded"
+                    className="bg-[#00030a] text-xs border border-[#09b7b4]/40 px-2 py-1 rounded text-[#bc9891]"
                 >
                     {mode === "sorting" && (
                         <>
@@ -457,21 +461,21 @@ function ControlPanel({
 
                 <button
                     onClick={handleStart}
-                    className="bg-[#b5c447] text-black px-4 py-1 rounded text-xs"
+                    className="bg-[#09b7b4] text-black px-4 py-1 rounded text-xs"
                 >
                     INITIALIZE
                 </button>
 
                 <button
                     onClick={pause}
-                    className="bg-[#f3a26c] text-black border border-[#2a3142] px-3 py-1 text-xs rounded"
+                    className="bg-[#e57744] text-black border border-[#e57744]/40 px-3 py-1 text-xs rounded"
                 >
                     PAUSE
                 </button>
 
                 <button
                     onClick={handleReset}
-                    className="bg-[#e1bdd2] text-black border border-[#2a3142] px-3 py-1 text-xs rounded"
+                    className="bg-[#ac4b3e] text-black border border-[#ac4b3e]/40 px-3 py-1 text-xs rounded"
                 >
                     RESET
                 </button>
@@ -479,7 +483,7 @@ function ControlPanel({
                 {mode !== "graph" && (
                     <button
                         onClick={() => generateArray(size)}
-                        className="bg-[#026f90] border border-[#2a3142] px-3 py-1 text-xs rounded"
+                        className="bg-[#bc9891] text-black border border-[#bc9891]/40 px-3 py-1 text-xs rounded"
                     >
                         GENERATE
                     </button>
@@ -490,8 +494,8 @@ function ControlPanel({
 
                 {/* TARGET (only in searching) */}
                 {mode === "searching" && (
-                    <div className="h-14.5 w-40 flex flex-col justify-center border border-slate-800/60 bg-slate-900/90 px-3 rounded-lg">
-                        <span className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                    <div className="h-14.5 w-40 flex flex-col justify-center border border-[#09b7b4]/20 bg-[#143542] px-3 rounded-lg">
+                        <span className="text-[10px] uppercase tracking-[0.25em] text-[#bc9891]/70">
                             Target
                         </span>
                         <input
@@ -499,17 +503,17 @@ function ControlPanel({
                             placeholder=" Value"
                             value={target}
                             onChange={(e) => setTarget(e.target.value)}
-                            className="mt-1 bg-slate-700 rounded-sm text-sm text-slate-200 outline-none"
+                            className="mt-1 bg-[#00030a] rounded-sm text-sm text-[#bc9891] outline-none border border-[#09b7b4]/20"
                         />
                     </div>
                 )}
 
                 {/* SIZE */}
                 {mode !== "graph" && (
-                    <div className="h-14.5 w-40 flex flex-col justify-center border border-slate-800/60 bg-slate-900/90 px-3 rounded-lg">
-                        <div className="flex justify-between text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                    <div className="h-14.5 w-40 flex flex-col justify-center border border-[#09b7b4]/20 bg-[#143542] px-3 rounded-lg">
+                        <div className="flex justify-between text-[10px] uppercase tracking-[0.25em] text-[#bc9891]/70">
                             <span>Size</span>
-                            <span className="text-slate-300 text-xs">{size}</span>
+                            <span className="text-[#bc9891] text-xs">{size}</span>
                         </div>
                         <input
                             type="range"
@@ -521,14 +525,14 @@ function ControlPanel({
                                 setSize(newSize);
                                 generateArray(newSize);
                             }}
-                            className="mt-1 w-full accent-amber-400"
+                            className="mt-1 w-full accent-[#09b7b4]"
                         />
                     </div>
                 )}
 
                 {/* SPEED */}
-                <div className="h-14.5 w-40 flex flex-col justify-center border border-slate-800/60 bg-slate-900/90 px-3 rounded-lg">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                <div className="h-14.5 w-40 flex flex-col justify-center border border-[#09b7b4]/20 bg-[#143542] px-3 rounded-lg">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#bc9891]/70">
                         Speed
                     </span>
                     <input
@@ -537,7 +541,32 @@ function ControlPanel({
                         max="300"
                         defaultValue="50"
                         onChange={(e) => setSpeed(Number(e.target.value))}
-                        className="mt-1 w-full accent-amber-400"
+                        className="mt-1 w-full accent-[#09b7b4]"
+                    />
+                </div>
+                {/* TIMELINE*/}
+                <div className="h-14.5 w-40 flex flex-col justify-center border border-[#09b7b4]/20 bg-[#143542] px-3 rounded-lg">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#bc9891]/70">Timeline</span>
+
+                    <input
+                        type="range"
+                        min="0"
+                        max={steps.length > 0 ? steps.length - 1 : 0}
+                        value={currentStep}
+                        onChange={(e) => {
+                            const stepIndex = Number(e.target.value);
+                            setCurrentStep(stepIndex);
+
+                            applyStep(steps[stepIndex], {
+                                array,
+                                setArray,
+                                setActive,
+                                setFoundIndex,
+                                setCurrentLine,
+                                setGrid
+                            });
+                        }}
+                        className="w-full accent-[#e57744]"
                     />
                 </div>
 

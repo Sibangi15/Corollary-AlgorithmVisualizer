@@ -227,6 +227,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PSEUDOCODE } from "../utils/pseudocode";
 import { createGrid } from "../utils/createGrid";
+import { COMPLEXITY } from "../utils/complexity";
 
 import ArrayBars from "../components/visualizer/ArrayBars";
 import CodePanel from "../components/visualizer/CodePanel";
@@ -247,9 +248,10 @@ function Visualizer() {
     const [mode, setMode] = useState("sorting");
     const [history, setHistory] = useState([]);
     const [grid, setGrid] = useState(createGrid(20, 40));
+    const complexity = COMPLEXITY[algorithm];
 
     const code = PSEUDOCODE[algorithm];
-    const { play, pause, setSpeed, isPlaying } = useAnimation();
+    const { play, pause, setSpeed, isPlaying, steps, currentStep, setCurrentStep, applyStep } = useAnimation();
 
     const fetchHistory = async () => {
         try {
@@ -294,29 +296,37 @@ function Visualizer() {
     const resetGrid = () => setGrid(createGrid(20, 40));
 
     return (
-        <div className="min-h-screen bg-[#05070d] text-[#cbd5e1]">
+        <div className="min-h-screen bg-linear-to-br from-[#00030a] to-[#143542] text-[#bc9891]">
 
             {/* ===== TOP SYSTEM BAR ===== */}
             <div className="px-6 pt-5">
-                <div className="flex items-center justify-between border border-[#1a1f2b] rounded-xl px-5 py-3 bg-[#0b0f17]">
+                <div className="flex items-center justify-between border border-[#09b7b4]/30 rounded-xl px-5 py-3 bg-[#143542]/80">
 
                     <div className="flex items-center gap-6">
-                        <div className="text-sm tracking-widest text-amber-400 font-semibold">
-                            COSMICPULSE
+                        <div className="text-2xl font-['Space_Grotesk'] tracking-[-0.02em] text-[#bc9891] font-semibold">
+                            Corollary
                         </div>
 
-                        <div className="text-xs text-slate-500">
-                            MODE: <span className="text-slate-300">{mode.toUpperCase()}</span>
+                        <div className="text-xs text-[#bc9891]/80">
+                            MODE: <span className="text-[#09b7b4]">{mode.toUpperCase()}</span>
                         </div>
 
-                        <div className="text-xs text-slate-500">
-                            ALGORITHM: <span className="text-amber-300">{algorithm.toUpperCase()}</span>
+                        <div className="text-xs text-[#bc9891]/80">
+                            ALGORITHM: <span className="text-[#e57744]">{algorithm.toUpperCase()}</span>
+                        </div>
+
+                        <div className="text-xs text-[#bc9891]/80">
+                            Time: <span className="text-[#09b7b4]">{complexity?.time}</span>
+                        </div>
+
+                        <div className="text-xs text-[#bc9891]/80">
+                            Space: <span className="text-[#e57744]">{complexity?.space}</span>
                         </div>
                     </div>
 
                     <button
                         onClick={() => navigate("/")}
-                        className="text-xs border border-[#2a3142] px-4 py-1 rounded-md text-slate-400 hover:text-white hover:border-amber-400 transition"
+                        className="text-xs border border-[#ac4b3e] px-4 py-1 rounded-md text-[#bc9891] hover:text-[#09b7b4] hover:border-[#09b7b4] transition"
                     >
                         HOME
                     </button>
@@ -342,6 +352,10 @@ function Visualizer() {
                     grid={grid}
                     setGrid={setGrid}
                     resetGrid={resetGrid}
+                    steps={steps}
+                    currentStep={currentStep}
+                    setCurrentStep={setCurrentStep}
+                    applyStep={applyStep}
                 />
             </div>
 
@@ -349,13 +363,13 @@ function Visualizer() {
             <div className="px-6 mt-5 grid grid-cols-[2fr_1fr] gap-5">
 
                 {/* VISUALIZER */}
-                <div className="bg-[#0b0f17] border border-[#1a1f2b] rounded-xl p-5 h-130">
+                <div className="bg-linear-to-br from-[#143542] to-[#00030a] border border-[#09b7b4]/20 rounded-xl p-5 h-130">
 
-                    <div className="text-xs text-slate-500 mb-2">
+                    <div className="text-xs text-[#bc9891]/70 mb-2">
                         CURRENT ALGORITHM
                     </div>
 
-                    <div className="text-amber-400 text-sm mb-4">
+                    <div className="text-[#e57744] text-sm mb-4">
                         {algorithm.toUpperCase()}
                     </div>
 
@@ -377,9 +391,9 @@ function Visualizer() {
                 </div>
 
                 {/* CODE PANEL */}
-                <div className="bg-[#0b0f17] border border-[#1a1f2b] rounded-xl p-4 h-130">
+                <div className="bg-linear-to-br from-[#143542] to-[#00030a] border border-[#09b7b4]/20 rounded-xl p-4 h-130">
 
-                    <div className="text-xs text-amber-300 mb-2">
+                    <div className="text-xs text-[#09b7b4] mb-2">
                         PSEUDOCODE
                     </div>
 
@@ -388,29 +402,29 @@ function Visualizer() {
             </div>
 
             {/* ===== HISTORY ===== */}
-            <section className="mt-6">
-                <div className="rounded-2xl bg-[#0b0f17] border border-[#1a1f2b] p-5 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.8)]">
+            <section className="mt-4 px-6">
+                <div className="rounded-2xl bg-linear-to-br from-[#143542] to-[#00030a] border border-[#09b7b4]/20 p-5 shadow-[0_20px_60px_-40px_rgba(0,3,10,0.8)]">
 
                     {/* HEADER */}
                     <div className="mb-4 flex items-center justify-between">
-                        <p className="text-xs uppercase tracking-[0.28em] text-amber-400">
+                        <p className="text-xs uppercase tracking-[0.28em] text-[#e57744]">
                             Recent Runs
                         </p>
 
-                        <span className="text-[10px] border border-amber-400 px-3 py-1 rounded-full text-slate-300">
+                        <span className="text-[10px] border border-[#09b7b4] px-3 py-1 rounded-full text-[#09b7b4]">
                             Latest Activity
                         </span>
                     </div>
 
                     {/* EMPTY STATE */}
                     {history.length === 0 ? (
-                        <p className="text-sm text-slate-500">No data yet</p>
+                        <p className="text-sm text-[#bc9891]/60">No data yet</p>
                     ) : (
 
-                        <div className="overflow-hidden rounded-lg border border-[#1f2633]">
+                        <div className="overflow-hidden rounded-lg border border-[#09b7b4]/20">
 
                             {/* TABLE HEADER */}
-                            <div className="grid grid-cols-4 text-[11px] uppercase tracking-[0.2em] text-slate-500 bg-[#0e131c] border-b border-[#1f2633] px-4 py-2">
+                            <div className="grid grid-cols-4 text-[11px] uppercase tracking-[0.2em] text-[#bc9891]/70 bg-[#00030a] border-b border-[#09b7b4]/20 px-4 py-2">
                                 <span>Algorithm</span>
                                 <span>Input Size</span>
                                 <span>Step Count</span>
@@ -418,25 +432,25 @@ function Visualizer() {
                             </div>
 
                             {/* TABLE BODY */}
-                            <div className="divide-y divide-[#1a1f2b]">
+                            <div className="divide-y divide-[#09b7b4]/10">
                                 {history.slice(0, 5).map((item) => (
                                     <div
                                         key={item._id}
-                                        className="grid grid-cols-4 px-4 py-3 text-sm text-slate-300 hover:bg-[#101622] transition"
+                                        className="grid grid-cols-4 px-4 py-3 text-sm text-[#bc9891] hover:bg-[#143542]/50 transition"
                                     >
-                                        <span className="text-[#e1bdd2] font-medium">
+                                        <span className="text-[#e57744] font-medium">
                                             {item.algorithm.toUpperCase()}
                                         </span>
 
-                                        <span className="text-[#f3a26c]">
+                                        <span className="text-[#09b7b4]">
                                             {item.inputSize}
                                         </span>
 
-                                        <span className="text-[#026f90]">
+                                        <span className="text-[#ac4b3e]">
                                             {item.stepsCount} steps
                                         </span>
 
-                                        <span className="text-[#b5c447] text-right tabular-nums">
+                                        <span className="text-[#e57744] text-right tabular-nums">
                                             {item.timeTaken} ms
                                         </span>
                                     </div>

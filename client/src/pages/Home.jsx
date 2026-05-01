@@ -4,9 +4,9 @@ function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-50">
+        <div className="min-h-screen bg-linear-to-br from-[#143542] to-[#00030a] border border-[#09b7b4]/20 text-slate-50">
             {/* Subtle background gradient */}
-            <div className="fixed inset-0 bg-linear-to-br from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
+            <div className="fixed inset-0 pointer-events-none" />
 
             {/* Minimal decorative line */}
             <div className="fixed top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-slate-700 to-transparent opacity-30 pointer-events-none" />
@@ -15,10 +15,12 @@ function Home() {
                 {/* Header Navigation */}
                 <header className="border-b border-slate-800/50 backdrop-blur-sm">
                     <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-                        <h1 className="text-lg font-medium tracking-tight">Algorithm Visualizer</h1>
+                        <h1 className="font-['Space_Grotesk'] text-3xl font-semibold tracking-[-0.02em] text-[#bc9891]">
+                            Corollary
+                        </h1>
                         <button
                             onClick={() => navigate("/visualizer")}
-                            className="text-sm px-4 py-2 text-slate-400 hover:text-slate-200 border border-slate-700/50 rounded hover:border-amber-400 transition-all"
+                            className="text-sm px-4 py-2 text-slate-400 hover:text-slate-200 border border-slate-700/50 rounded hover:border-[#09b7b4] transition-all"
                         >
                             Open
                         </button>
@@ -40,7 +42,7 @@ function Home() {
 
                         <button
                             onClick={() => navigate("/visualizer")}
-                            className="px-8 py-3 bg-slate-100 text-slate-950 font-medium rounded hover:bg-slate-200 transition-colors"
+                            className="px-8 py-3 bg-[#bc9891] text-slate-950 font-medium rounded hover:bg-[#ac4b3e] transition-colors"
                         >
                             Start Exploring
                         </button>
@@ -126,7 +128,7 @@ function Home() {
                             </div>
                             <button
                                 onClick={() => navigate("/visualizer")}
-                                className="text-sm px-6 py-2 text-slate-100 border border-slate-600 rounded hover:border-amber-400 hover:bg-slate-800/50 transition-all"
+                                className="text-sm px-6 py-2 text-slate-100 border border-slate-600 rounded hover:border-[#09b7b4] hover:bg-slate-800/50 transition-all"
                             >
                                 Go to Visualizer
                             </button>
@@ -136,7 +138,7 @@ function Home() {
                                 © 2026 Algorithm Visualizer. All Rights Reserved.
                                 <i>
                                     {" "}Designed & Developed by{" "}
-                                    <a href="https://sibangi-portfolio-website.netlify.app/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">
+                                    <a href="https://sibangi-portfolio-website.netlify.app/" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#ac4b3e] transition-colors">
                                         Sibangi Chakraborty
                                     </a>.
                                 </i>
