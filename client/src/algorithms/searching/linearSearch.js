@@ -5,26 +5,12 @@ export function linearSearch(arr, target) {
 
     for (let i = 0; i < arr.length; i++) {
         // visiting index
-        steps.push({
-            type: STEP_TYPES.VISIT,
-            index: i,
-            line: 1,
-        });
-
-        // compare
-        steps.push({
-            type: STEP_TYPES.COMPARE,
-            i: i,
-            j: -1,
-            line: 2,
-        });
+        steps.push({ type: STEP_TYPES.VISIT, index: i, line: 0 });
+        //compare
+        steps.push({ type: STEP_TYPES.COMPARE, i, j: -1, line: 1 });
 
         if (arr[i] === target) {
-            steps.push({
-                type: STEP_TYPES.FOUND,
-                index: i,
-                line: 3,
-            });
+            steps.push({ type: STEP_TYPES.FOUND, index: i, line: 2 });
             return steps;
         }
     }

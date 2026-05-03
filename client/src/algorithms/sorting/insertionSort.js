@@ -9,11 +9,9 @@ export function insertionSort(arr) {
         let j = i - 1;
 
         // highlight current key
-        steps.push({
-            type: STEP_TYPES.HIGHLIGHT,
-            index: i,
-            line: 1,
-        });
+        steps.push({ type: STEP_TYPES.HIGHLIGHT, index: i, line: 1 });
+
+        steps.push({ line: 3 });
 
         while (j >= 0) {
             // compare
@@ -32,10 +30,11 @@ export function insertionSort(arr) {
                     type: STEP_TYPES.SET,
                     index: j + 1,
                     value: a[j],
-                    line: 5,
+                    line: 4,
                 });
 
                 j--;
+                steps.push({ line: 5 });
             } else {
                 break;
             }
@@ -48,7 +47,7 @@ export function insertionSort(arr) {
             type: STEP_TYPES.SET,
             index: j + 1,
             value: key,
-            line: 7,
+            line: 6,
         });
     }
 

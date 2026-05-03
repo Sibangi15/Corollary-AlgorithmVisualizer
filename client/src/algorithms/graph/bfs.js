@@ -26,18 +26,22 @@ export function bfs(grid) {
             type: STEP_TYPES.VISIT_NODE,
             row: current.row,
             col: current.col,
+            line: 4
         });
 
         if (current === endNode) break;
 
         for (let neighbor of getNeighbors(current, grid)) {
+            steps.push({ line: 5 });
             const key = `${neighbor.row}-${neighbor.col}`;
 
             if (!visited.has(key)) {
+                steps.push({ line: 6 });
                 visited.add(key);
                 neighbor.previous = current;
                 queue.push(neighbor);
             }
+            steps.push({ line: 7 }); 
         }
     }
 
@@ -48,6 +52,7 @@ export function bfs(grid) {
             type: STEP_TYPES.PATH_NODE,
             row: cur.row,
             col: cur.col,
+            line: 8
         });
         cur = cur.previous;
     }

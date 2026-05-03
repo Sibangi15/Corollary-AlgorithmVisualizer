@@ -4,7 +4,7 @@ function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-[#143542] to-[#00030a] border border-[#09b7b4]/20 text-slate-50">
+        <div className="min-h-screen bg-linear-to-br from-[#4CAF50] to-[#00030a] border border-[#09b7b4]/20 text-slate-50">
             {/* Subtle background gradient */}
             <div className="fixed inset-0 pointer-events-none" />
 
@@ -15,7 +15,7 @@ function Home() {
                 {/* Header Navigation */}
                 <header className="border-b border-slate-800/50 backdrop-blur-sm">
                     <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-                        <h1 className="font-['Space_Grotesk'] text-3xl font-semibold tracking-[-0.02em] text-[#bc9891]">
+                        <h1 className="font-['Space_Grotesk'] text-3xl font-semibold tracking-[-0.02em] text-[#dabfba]">
                             Corollary
                         </h1>
                         <button
@@ -30,7 +30,7 @@ function Home() {
                 {/* Hero Section */}
                 <section className="min-h-[calc(100vh-80px)] flex items-center px-6 py-20">
                     <div className="max-w-3xl mx-auto text-center">
-                        <p className="text-sm uppercase tracking-widest text-slate-500 mb-6">Interactive Learning Tool</p>
+                        <p className="text-sm uppercase tracking-widest text-slate-300 mb-6">Interactive Learning Tool</p>
 
                         <h2 className="text-5xl md:text-6xl font-light mb-6 leading-tight">
                             Understand algorithms through visualization

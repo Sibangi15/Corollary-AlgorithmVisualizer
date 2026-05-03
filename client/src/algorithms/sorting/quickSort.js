@@ -11,18 +11,19 @@ export function quickSort(arr) {
         steps.push({
             type: STEP_TYPES.HIGHLIGHT,
             index: high,
-            line: 3,
+            line: 1,
         });
 
         let i = low;
 
         for (let j = low; j < high; j++) {
+            steps.push({ line: 3 });
             // compare with pivot
             steps.push({
                 type: STEP_TYPES.COMPARE,
                 i: j,
                 j: high,
-                line: 5,
+                line: 4,
             });
 
             if (a[j] < pivot) {
@@ -32,10 +33,11 @@ export function quickSort(arr) {
                     type: STEP_TYPES.SWAP,
                     i: i,
                     j: j,
-                    line: 7,
+                    line: 5,
                 });
 
                 i++;
+                steps.push({ line: 6 });
             }
         }
 
@@ -46,7 +48,7 @@ export function quickSort(arr) {
             type: STEP_TYPES.SWAP,
             i: i,
             j: high,
-            line: 9,
+            line: 7,
         });
 
         return i;

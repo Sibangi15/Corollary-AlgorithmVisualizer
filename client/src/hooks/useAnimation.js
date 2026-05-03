@@ -130,7 +130,7 @@ export default function useAnimation() {
     };
 
     const setSpeed = (value) => {
-        speedRef.current = value;
+        speedRef.current = 310 - value;
     };
 
     return {

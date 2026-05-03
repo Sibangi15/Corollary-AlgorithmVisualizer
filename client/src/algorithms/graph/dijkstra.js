@@ -35,17 +35,20 @@ export function dijkstra(grid) {
             type: STEP_TYPES.VISIT_NODE,
             row: current.row,
             col: current.col,
+            line: 3
         });
 
         if (current === endNode) break;
 
         for (let neighbor of getNeighbors(current, grid)) {
+            steps.push({ line: 4 });
             const newDist = current.distance + neighbor.weight;
 
             if (newDist < neighbor.distance) {
                 neighbor.distance = newDist;
                 neighbor.previous = current;
             }
+            steps.push({ line: 5 });
         }
     }
 
@@ -56,6 +59,7 @@ export function dijkstra(grid) {
             type: STEP_TYPES.PATH_NODE,
             row: cur.row,
             col: cur.col,
+            line: 6
         });
         cur = cur.previous;
     }

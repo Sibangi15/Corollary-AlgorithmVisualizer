@@ -8,17 +8,18 @@ export function selectionSort(arr) {
         let minIndex = i;
 
         for (let j = i + 1; j < a.length; j++) {
-
+            steps.push({ line: 2 });
             // compare
             steps.push({
                 type: STEP_TYPES.COMPARE,
                 i: minIndex,
                 j: j,
-                line: 2,
+                line: 3,
             });
 
             if (a[j] < a[minIndex]) {
                 minIndex = j;
+                steps.push({ line: 4 });
             }
         }
 
