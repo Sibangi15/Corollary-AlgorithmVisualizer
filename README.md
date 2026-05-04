@@ -6,7 +6,16 @@ An interactive **Algorithm Visualizer** built using the **MERN stack + React + T
 
 ## 🚀 Live Demo
 
-> *(Will be added shortly)*
+Frontend:
+
+```
+https://corollary-algorithm-visualizer.vercel.app/
+```
+Backend:
+
+```
+https://algorithmvisualizer-gzl3.onrender.com
+```
 
 ---
 
@@ -140,7 +149,17 @@ Each node contains:
 
 ## 📸 Screenshots
 
-> *(Screenshots will be added shortly)*
+### Home
+![Home](./screenshots/Home.png)
+
+### Sorting Visualizer
+![Sorting](./screenshots/Arrays.png)
+
+### Graph Visualization
+![Graph](./screenshots/Grid.png)
+
+### Recent History
+![History](./screenshots/DB.png)
 
 ---
 

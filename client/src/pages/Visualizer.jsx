@@ -40,7 +40,7 @@ function Visualizer() {
 
     const fetchHistory = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/session");
+            const res = await fetch("https://algorithmvisualizer-gzl3.onrender.com/api/session");
             const data = await res.json();
             setHistory(data);
         } catch (err) {

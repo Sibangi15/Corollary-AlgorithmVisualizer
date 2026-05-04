@@ -41,7 +41,7 @@ function ControlPanel({
 
     const saveSession = async (data) => {
         try {
-            await fetch("http://localhost:5000/api/session", {
+            await fetch("https://algorithmvisualizer-gzl3.onrender.com/api/session", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
