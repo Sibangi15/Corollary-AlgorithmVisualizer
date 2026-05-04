@@ -1,4 +1,4 @@
-# ⚡ Corollary — Algorithm Visualizer
+# Corollary — Algorithm Visualizer
 
 An interactive **Algorithm Visualizer** built using the **MERN stack + React + Tailwind CSS**, designed to help users understand how algorithms work through real-time animations, pseudocode synchronization, and performance insights.
 
@@ -44,24 +44,24 @@ https://algorithmvisualizer-gzl3.onrender.com
 
 ## 🎯 Key Highlights (Resume Boosters)
 
-* 🎬 **Step-based Animation Engine**
+*  **Step-based Animation Engine**
 
   * Custom `useAnimation` hook
   * Smooth async execution using `await sleep()`
 
-* 🧠 **Pseudocode Synchronization**
+*  **Pseudocode Synchronization**
 
   * Real-time line highlighting during execution
 
-* ⚡ **Execution Timeline (Scrubber)**
+*  **Execution Timeline (Scrubber)**
 
   * Jump to any step in the algorithm
 
-* 📊 **Complexity Display**
+*  **Complexity Display**
 
   * Time & space complexity shown dynamically
 
-* 🗂️ **Session History (MERN Integration)**
+*  **Session History (MERN Integration)**
 
   * Stores:
 
@@ -70,7 +70,7 @@ https://algorithmvisualizer-gzl3.onrender.com
     * Step count
     * Execution time
 
-* 🎨 **Interactive UI**
+*  **Interactive UI**
 
   * Dynamic array generation
   * Adjustable speed & size
