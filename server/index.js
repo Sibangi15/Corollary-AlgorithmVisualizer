@@ -11,7 +11,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "https://corollary-algorithm-visualizer.vercel.app/"
+  origin: "https://corollary-algorithm-visualizer.vercel.app"
 }));
 app.use(express.json());
 
